@@ -4,7 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "InputActionValue.h"
 #include "PlayerCharacter.generated.h"
+
+class UInputMappingContext;
+class UInputAction;
 
 UCLASS()
 class BLOCKHEADCPPW2023_API APlayerCharacter : public APawn
@@ -25,4 +29,13 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+		UInputMappingContext* InputMappingContext;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+		UInputAction* MoveAction;
+
+	void MoveHorizontally(const FInputActionValue& Value);
 };
