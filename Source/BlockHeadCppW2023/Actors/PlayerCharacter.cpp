@@ -8,6 +8,8 @@
 #include "EndPoint.h"
 #include "Engine/Engine.h"
 #include "Engine/LocalPlayer.h"
+#include "Camera/CameraComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/PlayerController.h"
 
 
@@ -25,6 +27,10 @@ APlayerCharacter::APlayerCharacter()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	UE_LOG(LogTemp, Warning, TEXT("Hello from C++ Player Character Constructor"));
+
+	Cube = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Cube"));
+	Cube->SetSimulatePhysics(true);
+	RootComponent = Cube;
 }
 
 // Called when the game starts or when spawned
