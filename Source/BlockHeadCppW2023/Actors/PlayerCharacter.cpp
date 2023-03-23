@@ -31,6 +31,16 @@ APlayerCharacter::APlayerCharacter()
 	Cube = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Cube"));
 	Cube->SetSimulatePhysics(true);
 	RootComponent = Cube;
+
+	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
+	// Let designers be responsible for these
+	//SpringArm->SetRelativeRotation(FRotator(-20, 0, 0));
+	//SprintArm->TargetArmLength = 400.0f;
+	//SpringArm->bInheritPitch;
+	SpringArm->SetupAttachment(Cube);
+
+	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
+	Camera->SetupAttachment(SpringArm);
 }
 
 // Called when the game starts or when spawned
