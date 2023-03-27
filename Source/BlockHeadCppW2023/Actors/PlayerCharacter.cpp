@@ -116,8 +116,7 @@ void APlayerCharacter::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherAct
 	FVector NormalImpulse, const FHitResult& Hit) {
 	if(OtherActor && OtherActor->IsA(AObstacle::StaticClass())) {
 		GLUTTON_LOG("ON HIT: OBSTACLE");
-		bLevelEnded = true;
-		Cube->SetPhysicsLinearVelocity({ 0, 0, 0 });
+		PlayerDied();
 	}
 }
 void APlayerCharacter::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
@@ -127,4 +126,11 @@ void APlayerCharacter::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, 
 		bLevelEnded = true;
 	}
 }
+
+void APlayerCharacter::PlayerDied() {
+	bLevelEnded = true;
+	Cube->SetPhysicsLinearVelocity({ 0, 0, 0 });
+}
+
+
 

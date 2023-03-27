@@ -55,16 +55,22 @@ protected:
 
 	// MOVEMENT VARIABLES
 	UPROPERTY(EditAnywhere, Category = "Movement");
-	float ForwardForce = 1800.0f;
+		float ForwardForce = 1800.0f;
 
 	UPROPERTY(EditAnywhere, Category = "Movement");
-	float SideForce = 1800.0f;
+		float SideForce = 1800.0f;
 
 	UPROPERTY(EditAnywhere, Category = "Movement");
-	bool bLevelEnded = false;
+		bool bLevelEnded = false;
+
+	UPROPERTY(EditAnywhere, Category = "Movement")
+		float killZ = -100;
 
 	UFUNCTION() // Required to bind to dynamic multi-cast delegate.
 		void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 	UFUNCTION() // The names of these functions don't matter, but the signature does.
 		void OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
+		void PlayerDied();
 };
