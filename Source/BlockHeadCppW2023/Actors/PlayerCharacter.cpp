@@ -9,6 +9,7 @@
 #include "Engine/Engine.h"
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/PlayerController.h"
 
@@ -74,12 +75,11 @@ void APlayerCharacter::BeginPlay()
 	UE_LOG(LogTemp, Warning, TEXT("Hello Logging FString: %s"), *Msg);
 	GEngine->AddOnScreenDebugMessage(0, 5.0f, FColor::Red, TEXT("On Screen Hello from C++ Player Character BeginPlay"));
 	*/
-	/*
+	
 	if (Cube) {
 		Cube->OnComponentHit.AddDynamic(this, &APlayerCharacter::OnHit);
-		Cube->OnComponentBeginOverlap.AddDynamic(this, &APlayerCharacter::OnOverlapBegin);
+		Cube->OnComponentBeginOverlap.AddDynamic(this, &APlayerCharacter::OnBeginOverlap);
 	}
-	*/
 }
 
 // Called every frame
@@ -116,15 +116,15 @@ void APlayerCharacter::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherAct
 	FVector NormalImpulse, const FHitResult& Hit) {
 	if(OtherActor && OtherActor->IsA(AObstacle::StaticClass())) {
 		GLUTTON_LOG("ON HIT: OBSTACLE");
-		//bLevelEnded = true;
-		//Cube->SetPhysicsLinearVelocity({ 0, 0, 0 });
+		bLevelEnded = true;
+		Cube->SetPhysicsLinearVelocity({ 0, 0, 0 });
 	}
 }
 void APlayerCharacter::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 	if (OtherActor && OtherActor->IsA(AEndPoint::StaticClass())) {
-		GLUTTON_LOG("ON OVERLAP");
-		//bLevelEnded = true;
+		GLUTTON_LOG("ON OVERLAP: End Point");
+		bLevelEnded = true;
 	}
 }
 
