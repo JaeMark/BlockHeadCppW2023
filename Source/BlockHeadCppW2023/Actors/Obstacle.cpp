@@ -7,8 +7,10 @@
 AObstacle::AObstacle()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
+	PrimaryActorTick.bCanEverTick = false;
+	Cube = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Cube"));
+	Cube->SetSimulatePhysics(true);
+	RootComponent = Cube;
 }
 
 // Called when the game starts or when spawned
@@ -18,10 +20,4 @@ void AObstacle::BeginPlay()
 	
 }
 
-// Called every frame
-void AObstacle::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
 

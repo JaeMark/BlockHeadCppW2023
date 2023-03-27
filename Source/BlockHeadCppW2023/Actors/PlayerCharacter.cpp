@@ -104,7 +104,12 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 }
 
 void APlayerCharacter::MoveHorizontally(const FInputActionValue& Value) {
-	UE_LOG(LogTemp, Warning, TEXT("Hello Logging float: %f"), 0);
+	const float MovementAxis = Value.Get<float>();
+
+	if(!bLevelEnded) {
+		const FVector CubeForce = FVector(0.0f, MovementAxis * SideForce, 0.0f);
+		Cube->AddForce(CubeForce, NAME_None, true);
+	}
 }
 
 void APlayerCharacter::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,

@@ -6,6 +6,9 @@
 #include "GameFramework/Actor.h"
 #include "EndPoint.generated.h"
 
+//Forward Declarations
+class UBoxComponent;
+
 UCLASS()
 class BLOCKHEADCPPW2023_API AEndPoint : public AActor
 {
@@ -19,8 +22,10 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+private:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = Setup)
+		UStaticMeshComponent* Plane;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = Setup)
+		UBoxComponent* CollisionBox;
 };
