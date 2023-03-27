@@ -66,7 +66,7 @@ protected:
 		bool bLevelEnded = false;
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
-		float KillZValue = -500;
+		float KillZThreshold = -500;
 
 	UFUNCTION() // Required to bind to dynamic multi-cast delegate.
 		void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);

@@ -90,7 +90,7 @@ void APlayerCharacter::Tick(float DeltaTime)
 		const FVector CubeForce = FVector(ForwardForce, 0.0f, 0.0f);
 		Cube->AddForce(CubeForce, NAME_None, true);
 		
-		if(GetActorLocation().Z <= KillZValue) {
+		if(GetActorLocation().Z < KillZThreshold) {
 			PlayerDied();
 		}
 	}
