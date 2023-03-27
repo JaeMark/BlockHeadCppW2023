@@ -6,12 +6,16 @@
 #include "EnhancedInputComponent.h"
 #include "Obstacle.h"
 #include "EndPoint.h"
+#include "BlockHeadCppW2023/Game/BlockHeadGameInstance.h"
+#include "BlockHeadCppW2023/Game/BlockHeadGameMode.h"
 #include "Engine/Engine.h"
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "GameFramework/GameModeBase.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/PlayerController.h"
+#include "Kismet/GameplayStatics.h"
 
 
 using UEILPS = UEnhancedInputLocalPlayerSubsystem;
@@ -42,12 +46,18 @@ APlayerCharacter::APlayerCharacter()
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(SpringArm);
+
+	GameModeRef = Cast<ABlockHeadGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+	GameInstanceRef = Cast<UBlockHeadGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 }
 
 // Called when the game starts or when spawned
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	GameModeRef->DebugCall();
+	GameInstanceRef->DebugCall();
 
 	const APlayerController* PlayerController = Cast<APlayerController>(GetController());
 

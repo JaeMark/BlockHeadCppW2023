@@ -3,3 +3,6 @@
 
 #include "BlockHeadGameMode.h"
 
+void ABlockHeadGameMode::DebugCall() {
+	UE_LOG(LogTemp, Warning, TEXT("%s"), *FString("BlockHeadGameMode Has Been Called"));
+}

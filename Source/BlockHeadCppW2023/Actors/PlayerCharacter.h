@@ -7,11 +7,14 @@
 #include "InputActionValue.h"
 #include "PlayerCharacter.generated.h"
 
+
 // Forward Declarations:
 class UInputMappingContext;
 class UInputAction;
 class USpringArmComponent;
 class UCameraComponent;
+class ABlockHeadGameMode;
+class UBlockHeadGameInstance;
 
 UCLASS()
 class BLOCKHEADCPPW2023_API APlayerCharacter : public APawn
@@ -67,6 +70,13 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
 		float KillZThreshold = -500;
+
+	// POINTERS
+	UPROPERTY()
+		ABlockHeadGameMode* GameModeRef;
+	UPROPERTY()
+		UBlockHeadGameInstance* GameInstanceRef;
+
 
 	UFUNCTION() // Required to bind to dynamic multi-cast delegate.
 		void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);

@@ -14,6 +14,9 @@ class BLOCKHEADCPPW2023_API UBlockHeadGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
 
+public:
+	void DebugCall();
+
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		TArray<FName> LevelNames;

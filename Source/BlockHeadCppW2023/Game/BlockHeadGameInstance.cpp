@@ -3,3 +3,6 @@
 
 #include "BlockHeadGameInstance.h"
 
+void UBlockHeadGameInstance::DebugCall() {
+	UE_LOG(LogTemp, Warning, TEXT("%s"), *FString("BlockHeadGameInstance Has Been Called"));
+}
