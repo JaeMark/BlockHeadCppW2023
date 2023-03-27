@@ -89,6 +89,10 @@ void APlayerCharacter::Tick(float DeltaTime)
 	if(!bLevelEnded) {
 		const FVector CubeForce = FVector(ForwardForce, 0.0f, 0.0f);
 		Cube->AddForce(CubeForce, NAME_None, true);
+		
+		if(GetActorLocation().Z <= KillZValue) {
+			PlayerDied();
+		}
 	}
 
 }
@@ -128,6 +132,7 @@ void APlayerCharacter::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, 
 }
 
 void APlayerCharacter::PlayerDied() {
+	GLUTTON_LOG("Dead!");
 	bLevelEnded = true;
 	Cube->SetPhysicsLinearVelocity({ 0, 0, 0 });
 }
