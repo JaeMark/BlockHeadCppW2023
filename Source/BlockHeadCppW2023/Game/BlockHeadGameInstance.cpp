@@ -16,7 +16,7 @@ void UBlockHeadGameInstance::LoadNextLevel() {
         UE_LOG(LogTemp, Warning, TEXT("%s"), *FString("No more levels to load. Current Level: %d", CurrentLevelIndex));
         return;
     }
-    UGameplayStatics::OpenLevelBySoftObjectPtr(this, Levels[NextLevelIndex]);
+    
     ++CurrentLevelIndex;
 }
 
@@ -25,7 +25,7 @@ bool UBlockHeadGameInstance::isPlayerOnFinalLevel() const {
 }
 
 void UBlockHeadGameInstance::SetInputMode(bool GameOnly) {
-    UWorld* World = GetWorld();
+    const UWorld* World = GetWorld();
     if(!World) {
         UE_LOG(LogTemp, Warning, TEXT("%s"), *FString("Cannot access world"));
         return;

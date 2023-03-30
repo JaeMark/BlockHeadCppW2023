@@ -9,10 +9,10 @@
 #include "Kismet/GameplayStatics.h"
 
 void ABlockHeadGameMode::BeginPlay() {
-	Super::BeginPlay();
-
 	GameInstanceRef = Cast<UBlockHeadGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	GameInstanceRef->SetInputMode(true);
+	if(GameInstanceRef) {
+		GameInstanceRef->LoadNextLevel();
+	}
 }
 
 void ABlockHeadGameMode::DebugCall() {

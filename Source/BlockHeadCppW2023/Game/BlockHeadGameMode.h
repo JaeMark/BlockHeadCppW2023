@@ -15,9 +15,6 @@ class BLOCKHEADCPPW2023_API ABlockHeadGameMode : public AGameModeBase
 	GENERATED_BODY()
 
 protected:
-	UPROPERTY(BlueprintReadOnly)
-		UBlockHeadGameInstance* GameInstanceRef;
-
 	FTimerHandle LevelSwapTimer;
 
 public:
@@ -28,5 +25,7 @@ public:
 	void NextLevel();
 	void GameCompleted(bool PlayerWon);
 
-
+protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		UBlockHeadGameInstance* GameInstanceRef;
 };
