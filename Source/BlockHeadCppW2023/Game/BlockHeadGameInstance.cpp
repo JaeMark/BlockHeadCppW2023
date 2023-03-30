@@ -49,5 +49,5 @@ void UBlockHeadGameInstance::SetInputMode(bool GameOnly) const {
 
 void UBlockHeadGameInstance::LoadFirstLevel() {
     CurrentLevelIndex = 0;
-    LoadNextLevel();
+    UGameplayStatics::OpenLevelBySoftObjectPtr(this, Levels[CurrentLevelIndex]);
 }
