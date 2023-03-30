@@ -48,7 +48,6 @@ APlayerCharacter::APlayerCharacter()
 	Camera->SetupAttachment(SpringArm);
 
 	GameModeRef = Cast<ABlockHeadGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
-	GameInstanceRef = Cast<UBlockHeadGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 }
 
 // Called when the game starts or when spawned
@@ -57,7 +56,6 @@ void APlayerCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	GameModeRef->DebugCall();
-	GameInstanceRef->DebugCall();
 
 	const APlayerController* PlayerController = Cast<APlayerController>(GetController());
 
@@ -138,6 +136,7 @@ void APlayerCharacter::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, 
 	if (OtherActor && OtherActor->IsA(AEndPoint::StaticClass())) {
 		GLUTTON_LOG("ON OVERLAP: End Point");
 		bLevelEnded = true;
+		GameModeRef->LevelCompleted();
 	}
 }
 

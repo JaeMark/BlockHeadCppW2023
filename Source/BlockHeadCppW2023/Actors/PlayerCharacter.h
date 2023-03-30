@@ -72,11 +72,8 @@ protected:
 		float KillZThreshold = -500;
 
 	// POINTERS
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		ABlockHeadGameMode* GameModeRef;
-	UPROPERTY()
-		UBlockHeadGameInstance* GameInstanceRef;
-
 
 	UFUNCTION() // Required to bind to dynamic multi-cast delegate.
 		void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
