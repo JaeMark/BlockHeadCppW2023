@@ -14,6 +14,13 @@ class BLOCKHEADCPPW2023_API UBlockHeadGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
 
+protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Game Levels")
+		int32 CurrentLevelIndex = 0;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Game Levels")
+		TArray<TSoftObjectPtr<UWorld>> Levels;;
+
 public:
 	void DebugCall();
 	void LoadNextLevel();
@@ -31,13 +38,4 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Game Levels")
 		void LoadFirstLevel();
-
-protected:
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		int32 CurrentLevelIndex = 0;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-		TArray<TSoftObjectPtr<UWorld>> Levels;
-
-	
 };
