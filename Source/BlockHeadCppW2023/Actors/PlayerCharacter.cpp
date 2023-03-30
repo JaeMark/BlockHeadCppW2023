@@ -72,7 +72,6 @@ void APlayerCharacter::BeginPlay()
 	FString Msg{ "This is a message" };
 
 	GLUTTON_LOG("Hello from C++ Player Character BeginPlay.");
-	GLUTTON_LOG(PRINTF("Hello Logging float: %f", Pi));
 
 	/*
 
@@ -117,7 +116,7 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 void APlayerCharacter::MoveHorizontally(const FInputActionValue& Value) {
 	const float MovementAxis = Value.Get<float>();
-
+	UE_LOG(LogTemp, Warning, TEXT("Horizontal Movement"));
 	if(!bLevelEnded) {
 		const FVector CubeForce = FVector(0.0f, MovementAxis * SideForce, 0.0f);
 		Cube->AddForce(CubeForce, NAME_None, true);
