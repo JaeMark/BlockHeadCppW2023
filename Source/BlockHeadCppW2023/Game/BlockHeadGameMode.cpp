@@ -10,9 +10,6 @@
 
 void ABlockHeadGameMode::BeginPlay() {
 	GameInstanceRef = Cast<UBlockHeadGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	if(GameInstanceRef) {
-		GameInstanceRef->LoadNextLevel();
-	}
 }
 
 void ABlockHeadGameMode::DebugCall() {

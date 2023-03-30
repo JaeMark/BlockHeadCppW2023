@@ -20,7 +20,7 @@ public:
 	bool isPlayerOnFinalLevel() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Input Mode")
-		void SetInputMode(bool GameOnly);
+		void SetInputMode(bool GameOnly) const;
 	// Get the world
 	// From the World, get the first player controller. (APlayerController*)
 	// Call set input mode on controller with one of two structs:

@@ -12,11 +12,15 @@ void UBlockHeadGameInstance::DebugCall() {
 
 void UBlockHeadGameInstance::LoadNextLevel() {
 	const int32 NextLevelIndex = CurrentLevelIndex + 1;
+
+    UE_LOG(LogTemp, Warning, TEXT("%s"), *FString::FromInt(NextLevelIndex));
+    UE_LOG(LogTemp, Warning, TEXT("%s"), *FString::FromInt(Levels.Num()));
     if (NextLevelIndex >= Levels.Num()){
         UE_LOG(LogTemp, Warning, TEXT("%s"), *FString("No more levels to load. Current Level: %d", CurrentLevelIndex));
         return;
     }
-    
+    UE_LOG(LogTemp, Warning, TEXT("%s"), *FString("Loading Level", NextLevelIndex));
+    UGameplayStatics::OpenLevelBySoftObjectPtr(this, Levels[NextLevelIndex]);
     ++CurrentLevelIndex;
 }
 
@@ -24,7 +28,7 @@ bool UBlockHeadGameInstance::isPlayerOnFinalLevel() const {
     return CurrentLevelIndex == Levels.Num();
 }
 
-void UBlockHeadGameInstance::SetInputMode(bool GameOnly) {
+void UBlockHeadGameInstance::SetInputMode(bool GameOnly) const {
     const UWorld* World = GetWorld();
     if(!World) {
         UE_LOG(LogTemp, Warning, TEXT("%s"), *FString("Cannot access world"));
