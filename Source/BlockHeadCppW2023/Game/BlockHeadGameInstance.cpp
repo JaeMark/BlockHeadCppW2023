@@ -24,8 +24,8 @@ bool UBlockHeadGameInstance::isPlayerOnFinalLevel() const {
     return CurrentLevelIndex == Levels.Num();
 }
 
-void UBlockHeadGameInstance::SetInputMode(bool GameOnly) const {
-    const UWorld* World = GetWorld();
+void UBlockHeadGameInstance::SetInputMode(bool GameOnly) {
+    UWorld* World = GetWorld();
     if(!World) {
         UE_LOG(LogTemp, Warning, TEXT("%s"), *FString("Cannot access world"));
         return;
