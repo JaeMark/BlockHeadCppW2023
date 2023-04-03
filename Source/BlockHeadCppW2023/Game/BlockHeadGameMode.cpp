@@ -6,6 +6,7 @@
 #include "TimerManager.h"
 #include "BlockHeadCppW2023/Game/BlockHeadGameInstance.h"
 #include "Blueprint/UserWidget.h"
+#include "Components/TextBlock.h"
 #include "Engine/World.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -47,6 +48,13 @@ void ABlockHeadGameMode::GameCompleted(bool PlayerWon) {
 		GameCompleteWidget = CreateWidget<UUserWidget>(GetWorld(), DefaultGameCompleteWidget);
 		if (GameCompleteWidget) {
 			GameCompleteWidget->AddToViewport();
+			UTextBlock* LostOrComplete = Cast<UTextBlock>(
+				GameCompleteWidget->GetWidgetFromName(TEXT("LostOrComplete"))
+			);
+			if(LostOrComplete) {
+				const FText WinLossMessage = PlayerWon ? FText::FromString("You Won!") : FText::FromString("You Lost!");
+				LostOrComplete->SetText(WinLossMessage);
+			}
 		}
 	} else {
 		UE_LOG(LogTemp, Warning, TEXT("%s"), *FString("DefaultGameCompleteWidget has not been set."));
