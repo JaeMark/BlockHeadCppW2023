@@ -36,6 +36,7 @@ APlayerCharacter::APlayerCharacter()
 
 	Cube = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Cube"));
 	Cube->SetSimulatePhysics(true);
+	Cube->SetNotifyRigidBodyCollision(true);
 	RootComponent = Cube;
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
