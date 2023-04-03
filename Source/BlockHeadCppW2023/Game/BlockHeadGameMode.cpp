@@ -5,6 +5,7 @@
 
 #include "TimerManager.h"
 #include "BlockHeadCppW2023/Game/BlockHeadGameInstance.h"
+#include "Blueprint/UserWidget.h"
 #include "Engine/World.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -17,13 +18,37 @@ void ABlockHeadGameMode::DebugCall() {
 }
 
 void ABlockHeadGameMode::LevelCompleted() {
-	GameInstanceRef->DebugCall();
+	if(DefaultLevelCompleteWidget) {
+		LevelCompleteWidget = CreateWidget<UUserWidget>(GetWorld(), DefaultLevelCompleteWidget);
+		LevelCompleteWidget->AddToViewport();
+	} else {
+		UE_LOG(LogTemp, Warning, TEXT("%s"), *FString("DefaultLevelCompleteWidget has not been set."));
+	}
+
 	GetWorldTimerManager().SetTimer(LevelSwapTimer, this, &ABlockHeadGameMode::NextLevel, 2.0f, false);
 }
 
 void ABlockHeadGameMode::NextLevel() {
-	GameInstanceRef->LoadNextLevel();
+	if(GameInstanceRef->isPlayerOnFinalLevel()) {
+		if(LevelCompleteWidget) {
+			LevelCompleteWidget->RemoveFromParent();
+		}
+		GameCompleted(true);
+	} else {
+		GameInstanceRef->LoadNextLevel();
+	}
 }
 
 void ABlockHeadGameMode::GameCompleted(bool PlayerWon) {
+	// set input mode to UI only
+	GameInstanceRef->SetInputMode(false);
+
+	if (DefaultGameCompleteWidget) {
+		GameCompleteWidget = CreateWidget<UUserWidget>(GetWorld(), DefaultGameCompleteWidget);
+		if (GameCompleteWidget) {
+			GameCompleteWidget->AddToViewport();
+		}
+	} else {
+		UE_LOG(LogTemp, Warning, TEXT("%s"), *FString("DefaultGameCompleteWidget has not been set."));
+	}
 }

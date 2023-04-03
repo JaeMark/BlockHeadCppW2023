@@ -17,6 +17,21 @@ class BLOCKHEADCPPW2023_API ABlockHeadGameMode : public AGameModeBase
 protected:
 	FTimerHandle LevelSwapTimer;
 
+	UPROPERTY(BlueprintReadOnly)
+		UBlockHeadGameInstance* GameInstanceRef;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UMG")
+		TSubclassOf<UUserWidget> DefaultLevelCompleteWidget;
+
+	UPROPERTY()
+		UUserWidget* LevelCompleteWidget;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UMG")
+		TSubclassOf<UUserWidget> DefaultGameCompleteWidget;
+
+	UPROPERTY()
+		UUserWidget* GameCompleteWidget;
+
 public:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -24,8 +39,4 @@ public:
 	void LevelCompleted();
 	void NextLevel();
 	void GameCompleted(bool PlayerWon);
-
-protected:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-		UBlockHeadGameInstance* GameInstanceRef;
 };

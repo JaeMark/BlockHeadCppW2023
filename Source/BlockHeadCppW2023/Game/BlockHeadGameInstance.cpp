@@ -25,7 +25,7 @@ void UBlockHeadGameInstance::LoadNextLevel() {
 }
 
 bool UBlockHeadGameInstance::isPlayerOnFinalLevel() const {
-    return CurrentLevelIndex == Levels.Num();
+    return CurrentLevelIndex == Levels.Num()-1;
 }
 
 void UBlockHeadGameInstance::SetInputMode(bool GameOnly) const {

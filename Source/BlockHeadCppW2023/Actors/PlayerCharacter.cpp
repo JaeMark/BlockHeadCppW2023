@@ -6,6 +6,7 @@
 #include "EnhancedInputComponent.h"
 #include "Obstacle.h"
 #include "EndPoint.h"
+#include "TimerManager.h"
 #include "BlockHeadCppW2023/Game/BlockHeadGameInstance.h"
 #include "BlockHeadCppW2023/Game/BlockHeadGameMode.h"
 #include "Engine/Engine.h"
@@ -66,14 +67,14 @@ void APlayerCharacter::BeginPlay()
 			SubSystem->AddMappingContext(InputMappingContext, 0);
 		}
 	}
-
+	/*
 	int32 Answer = 42;
 	float Pi = 3.14;
 	FString Msg{ "This is a message" };
 
 	GLUTTON_LOG("Hello from C++ Player Character BeginPlay.");
 	GLUTTON_LOG(PRINTF("Hello Logging float: %f", Pi));
-
+	*/
 	/*
 
 
@@ -136,6 +137,7 @@ void APlayerCharacter::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, 
 	if (OtherActor && OtherActor->IsA(AEndPoint::StaticClass())) {
 		GLUTTON_LOG("ON OVERLAP: End Point");
 		bLevelEnded = true;
+		Cube->SetPhysicsLinearVelocity(Cube->GetPhysicsLinearVelocity() * 0.5);
 		GameModeRef->LevelCompleted();
 	}
 }
@@ -144,6 +146,7 @@ void APlayerCharacter::PlayerDied() {
 	GLUTTON_LOG("Dead!");
 	bLevelEnded = true;
 	Cube->SetPhysicsLinearVelocity({ 0, 0, 0 });
+	GetWorldTimerManager().SetTimer(GameCompleteTimer, [this]() { GameModeRef->GameCompleted(false); }, 2.0f, false);
 }
 
 
