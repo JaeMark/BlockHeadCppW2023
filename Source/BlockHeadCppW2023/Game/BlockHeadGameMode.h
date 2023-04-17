@@ -32,6 +32,12 @@ protected:
 	UPROPERTY()
 		UUserWidget* GameCompleteWidget;
 
+	UPROPERTY()
+		UUserWidget* ScoreWidget;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UMG")
+		TSubclassOf<UUserWidget> DefaultScoreWidget;
+
 public:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -39,4 +45,5 @@ public:
 	void LevelCompleted();
 	void NextLevel();
 	void GameCompleted(bool PlayerWon);
+	void StartLevel();
 };

@@ -6,8 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "Pickup.generated.h"
 
-class ABlockHeadGameMode;
 // FORWARD DECLARATIONS
+class ABlockHeadGameMode;
 class USphereComponent;
 
 UCLASS()

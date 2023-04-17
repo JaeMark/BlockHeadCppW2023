@@ -50,6 +50,11 @@ APlayerCharacter::APlayerCharacter()
 	Camera->SetupAttachment(SpringArm);
 
 	GameModeRef = Cast<ABlockHeadGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+	if(GameModeRef) {
+		GameModeRef->StartLevel();
+	} else {
+		GLUTTON_LOG("Game mode reference is invalid.");
+	}
 }
 
 // Called when the game starts or when spawned
