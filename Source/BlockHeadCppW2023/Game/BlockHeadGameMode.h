@@ -45,5 +45,4 @@ public:
 	void LevelCompleted();
 	void NextLevel();
 	void GameCompleted(bool PlayerWon);
-	void StartLevel();
 };

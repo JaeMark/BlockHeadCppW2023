@@ -12,6 +12,14 @@
 
 void ABlockHeadGameMode::BeginPlay() {
 	GameInstanceRef = Cast<UBlockHeadGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+
+	if (DefaultScoreWidget) {
+		ScoreWidget = CreateWidget<UUserWidget>(GetWorld(), DefaultScoreWidget);
+		ScoreWidget->AddToViewport();
+	}
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("%s"), *FString("DefaultScoreWidget has not been set."));
+	}
 }
 
 void ABlockHeadGameMode::DebugCall() {
@@ -60,13 +68,3 @@ void ABlockHeadGameMode::GameCompleted(bool PlayerWon) {
 		UE_LOG(LogTemp, Warning, TEXT("%s"), *FString("DefaultGameCompleteWidget has not been set."));
 	}
 }
-
-void ABlockHeadGameMode::StartLevel() {
-	if(DefaultScoreWidget) {
-		ScoreWidget = CreateWidget<UUserWidget>(GetWorld(), DefaultScoreWidget);
-		ScoreWidget->AddToViewport();
-	} else {
-		UE_LOG(LogTemp, Warning, TEXT("%s"), *FString("DefaultScoreWidget has not been set."));
-	}
-}
-
