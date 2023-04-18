@@ -19,8 +19,11 @@ public:
 	// Sets default values for this actor's properties
 	APickup();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite);
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float PickupValue = 1.0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		FLinearColor PickupColor = FLinearColor::Yellow;
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = Setup)

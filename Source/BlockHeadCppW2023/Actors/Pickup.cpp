@@ -34,7 +34,11 @@ APickup::APickup()
 void APickup::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	if (UMaterialInstanceDynamic* DynamicMaterial = PickupMesh->CreateAndSetMaterialInstanceDynamic(0))
+	{
+		DynamicMaterial->SetVectorParameterValue(TEXT("Color"), PickupColor);
+	}
 }
 
 void APickup::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
