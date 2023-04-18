@@ -1,8 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "BlockHeadGameMode.h"
-
 #include "TimerManager.h"
 #include "BlockHeadCppW2023/Game/BlockHeadGameInstance.h"
 #include "Blueprint/UserWidget.h"
@@ -20,6 +18,8 @@ void ABlockHeadGameMode::BeginPlay() {
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("%s"), *FString("DefaultScoreWidget has not been set."));
 	}
+
+	CurrentScore = 0.0f;
 }
 
 void ABlockHeadGameMode::DebugCall() {
@@ -67,4 +67,10 @@ void ABlockHeadGameMode::GameCompleted(bool PlayerWon) {
 	} else {
 		UE_LOG(LogTemp, Warning, TEXT("%s"), *FString("DefaultGameCompleteWidget has not been set."));
 	}
+}
+
+void ABlockHeadGameMode::UpdateScore_Implementation(float DeltaScore){
+	const float CurrentScores = 1.0f;
+	//+= DeltaScore;
+	OnUpdateScore.Broadcast(CurrentScores);
 }

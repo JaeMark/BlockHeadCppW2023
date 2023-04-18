@@ -9,6 +9,8 @@
 // FORWARD DECLARATIONS
 class UBlockHeadGameInstance;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnUpdateScore, float, NewScore);
+
 UCLASS()
 class BLOCKHEADCPPW2023_API ABlockHeadGameMode : public AGameModeBase
 {
@@ -38,6 +40,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UMG")
 		TSubclassOf<UUserWidget> DefaultScoreWidget;
 
+	UPROPERTY()
+		float CurrentScore = 0.0f;
+
+	UPROPERTY(BlueprintAssignable, Category = "EventDispatchers")
+		FOnUpdateScore OnUpdateScore;
+
 public:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -45,4 +53,8 @@ public:
 	void LevelCompleted();
 	void NextLevel();
 	void GameCompleted(bool PlayerWon);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+		void UpdateScore(float DeltaScore);
+		virtual void UpdateScore_Implementation(float DeltaScore);
 };
