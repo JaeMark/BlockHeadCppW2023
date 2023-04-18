@@ -9,46 +9,50 @@
 // FORWARD DECLARATIONS
 class ABlockHeadGameMode;
 class USphereComponent;
+class UNiagaraComponent;
 
 UCLASS()
 class BLOCKHEADCPPW2023_API APickup : public AActor
 {
-	GENERATED_BODY()
-	
-public:	
-	// Sets default values for this actor's properties
-	APickup();
+    GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		float PickupValue = 1.0;
+public:
+    // Sets default values for this actor's properties
+    APickup();
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-		FLinearColor PickupColor = FLinearColor::Yellow;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        float PickupValue = 1.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly)
+        FLinearColor PickupColor = FLinearColor::Yellow;
 
 private:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = Setup)
-		UStaticMeshComponent* PickupMesh;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "Setup")
+        UStaticMeshComponent* PickupMesh;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = Setup)
-		USphereComponent* PickupRange;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "Setup")
+        USphereComponent* PickupRange;
 
-protected:
-	// POINTERS
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		ABlockHeadGameMode* GameModeRef;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "Setup")
+        UNiagaraComponent* NiagaraSystem;
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+    // POINTERS
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+        ABlockHeadGameMode* GameModeRef;
 
-	UFUNCTION() // The names of these functions don't matter, but the signature does.
-		void OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+protected:
+    // Called when the game starts or when spawned
+    virtual void BeginPlay() override;
 
-	UFUNCTION(BlueprintImplementableEvent)
-		void UpdateScore(float DeltaScore) const;
+    UFUNCTION()
+        void OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+            int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+    UFUNCTION(BlueprintImplementableEvent)
+        void UpdateScore(float DeltaScore) const;
 
+public:
+    // Called every frame
+    virtual void Tick(float DeltaTime) override;
 };

@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Pickup.h"
 
 #include "PlayerCharacter.h"
@@ -8,6 +7,7 @@
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "NiagaraComponent.h"
 
 // Sets default values
 APickup::APickup()
@@ -28,6 +28,15 @@ APickup::APickup()
 	PickupMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PickupMesh"));
 	PickupMesh->SetCollisionProfileName(TEXT("NoCollision"));
 	PickupMesh->SetupAttachment(PickupRange);
+
+	NiagaraSystem = CreateDefaultSubobject<UNiagaraComponent>(TEXT("NiagaraSystem"));
+	if (NiagaraSystem) {
+		NiagaraSystem->SetVariableVec3(TEXT("Color"), FVector(PickupColor.R, PickupColor.G, PickupColor.B));
+		NiagaraSystem->Activate(true);
+	}
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("Niagara System is missing."));
+	}
 }
 
 // Called when the game starts or when spawned
@@ -35,8 +44,7 @@ void APickup::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (UMaterialInstanceDynamic* DynamicMaterial = PickupMesh->CreateAndSetMaterialInstanceDynamic(0))
-	{
+	if (UMaterialInstanceDynamic* DynamicMaterial = PickupMesh->CreateAndSetMaterialInstanceDynamic(0)) {
 		DynamicMaterial->SetVectorParameterValue(TEXT("Color"), PickupColor);
 	}
 }
