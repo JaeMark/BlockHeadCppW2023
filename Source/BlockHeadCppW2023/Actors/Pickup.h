@@ -31,7 +31,7 @@ private:
 
 protected:
 	// POINTERS
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		ABlockHeadGameMode* GameModeRef;
 
 protected:
@@ -40,6 +40,9 @@ protected:
 
 	UFUNCTION() // The names of these functions don't matter, but the signature does.
 		void OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION(BlueprintImplementableEvent)
+		void UpdateScore(float DeltaScore) const;
 
 public:	
 	// Called every frame
