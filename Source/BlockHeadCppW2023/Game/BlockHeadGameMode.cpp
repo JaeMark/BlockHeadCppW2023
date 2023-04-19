@@ -70,7 +70,6 @@ void ABlockHeadGameMode::GameCompleted(bool PlayerWon) {
 }
 
 void ABlockHeadGameMode::UpdateScore_Implementation(float DeltaScore){
-	const float CurrentScores = 1.0f;
-	//+= DeltaScore;
-	OnUpdateScore.Broadcast(CurrentScores);
+	CurrentScore += DeltaScore;
+	OnUpdateScore.Broadcast(CurrentScore);
 }
