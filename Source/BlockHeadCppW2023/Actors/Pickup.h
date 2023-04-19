@@ -37,6 +37,9 @@ private:
         UNiagaraComponent* NiagaraSystem;
 
 protected:
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+        USceneComponent* Root;
+
     // POINTERS
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
         ABlockHeadGameMode* GameModeRef;
