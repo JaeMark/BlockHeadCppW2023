@@ -53,9 +53,7 @@ public:
 	void LevelCompleted();
 	void NextLevel();
 	void GameCompleted(bool PlayerWon);
-	void UpdateScore_Implmentation(float DeltaScore);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 		void UpdateScore(float DeltaScore);
-		virtual void UpdateScore_Implementation(float DeltaScore);
 };
