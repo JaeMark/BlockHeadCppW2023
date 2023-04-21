@@ -49,5 +49,14 @@ void UBlockHeadGameInstance::SetInputMode(bool GameOnly) const {
 
 void UBlockHeadGameInstance::LoadFirstLevel() {
     CurrentLevelIndex = 0;
+    Score = 0.0f;
     UGameplayStatics::OpenLevelBySoftObjectPtr(this, Levels[CurrentLevelIndex]);
+}
+
+void UBlockHeadGameInstance::SaveScore(float ScoreToSave) {
+    Score = ScoreToSave;
+}
+
+float UBlockHeadGameInstance::GetScore() {
+    return Score;
 }

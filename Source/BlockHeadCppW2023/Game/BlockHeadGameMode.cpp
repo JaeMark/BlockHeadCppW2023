@@ -19,7 +19,8 @@ void ABlockHeadGameMode::BeginPlay() {
 		UE_LOG(LogTemp, Warning, TEXT("%s"), *FString("DefaultScoreWidget has not been set."));
 	}
 
-	CurrentScore = 0.0f;
+	CurrentScore = GameInstanceRef->GetScore();
+	OnUpdateScore.Broadcast(CurrentScore);
 }
 
 void ABlockHeadGameMode::DebugCall() {
@@ -38,6 +39,7 @@ void ABlockHeadGameMode::LevelCompleted() {
 }
 
 void ABlockHeadGameMode::NextLevel() {
+	GameInstanceRef->SaveScore(CurrentScore);
 	if(GameInstanceRef->isPlayerOnFinalLevel()) {
 		if(LevelCompleteWidget) {
 			LevelCompleteWidget->RemoveFromParent();

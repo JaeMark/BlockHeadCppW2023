@@ -32,12 +32,21 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Game Levels")
 		void LoadFirstLevel();
 
+	UFUNCTION(BlueprintCallable, Category = "Score")
+		void SaveScore(float ScoreToSave);
+
+	UFUNCTION(BlueprintCallable, Category = "Score")
+		float GetScore();
+
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		int32 CurrentLevelIndex = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		TArray<TSoftObjectPtr<UWorld>> Levels;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		float Score = 0;
 
 	
 };
